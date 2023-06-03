@@ -9,7 +9,7 @@ final class MovieQuizViewController: UIViewController {
     
     @IBOutlet private var counterLabel: UILabel!
     
-    // переменная с индексом текущего вопроса, начальное значение 0
+
     // (по этому индексу будем искать вопрос в массиве, где индекс первого элемента 0, а не 1)
     private var currentQuestionIndex = 0
     
