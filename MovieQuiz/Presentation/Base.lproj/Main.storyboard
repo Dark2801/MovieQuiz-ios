@@ -126,7 +126,7 @@ YP Black</string>
                     <connections>
                         <outlet property="counterLabel" destination="gXv-v7-ZR6" id="Lmt-iw-Sxk"/>
                         <outlet property="imageView" destination="ufM-Xq-4TA" id="did-BB-HyE"/>
-                        <outlet property="textLabel" destination="R4A-R3-1IG" id="KKC-EL-hFW"/>
+                        <outlet property="textLabel" destination="JwI-o2-WIk" id="mEj-q3-YN8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
