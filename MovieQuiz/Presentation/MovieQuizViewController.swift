@@ -54,7 +54,10 @@ final class MovieQuizViewController: UIViewController {
             message: result.text,
             preferredStyle: .alert)
         
-        let action = UIAlertAction(title: result.buttonText, style: .default) { _ in
+        let action = UIAlertAction(title: result.buttonText, style: .default) { [weak self] _ in
+            guard let self = self else {return}
+            
+            self.correctAnswers = 0
             self.currentQuestionIndex = 0
             
             let firstQuestion = questions[self.currentQuestionIndex]
@@ -85,7 +88,10 @@ final class MovieQuizViewController: UIViewController {
         imageView.layer.cornerRadius = 20
         noButton.isEnabled = false
         yesButton.isEnabled = false
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            guard let self = self else {return}
+            
+            self.showNextQuestionOrResults()
             self.showNextQuestionOrResults()
             self.noButton.isEnabled = true
             self.yesButton.isEnabled = true
