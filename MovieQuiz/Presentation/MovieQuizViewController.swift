@@ -14,13 +14,20 @@ final class MovieQuizViewController: UIViewController {
     
     // переменная сщ счетчиком правильных ответов, начальное значение закономерно 0
     private var correctAnswers = 0
-    //questionsA
+    //questionsAmount - общее количество вопросов для квиза.
+    private let questionsAmount: Int = 10
+    // questionFactory - фабрика вопросов.
+    private let questionFactory: QuestionFactory = QuestionFactory()
+    // currentQuestion - текущий вопрос, который видит пользователь.
+    private var currentQuestion: QuizQuestion?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let currentQuestion = questions[currentQuestionIndex]
-        let step = convert(model: currentQuestion)
-        show(quiz: step)
+        if let firstQuestion = questionFactory.requestNextQuestion() {
+            currentQuestion = firstQuestion
+            let viewModel = convert(model: firstQuestion)
+            show(quiz: viewModel)
+        }
         
     }
     @IBOutlet weak var noButton: UIButton!
