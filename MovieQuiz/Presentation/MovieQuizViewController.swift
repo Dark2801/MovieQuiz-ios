@@ -14,6 +14,7 @@ final class MovieQuizViewController: UIViewController {
     
     // переменная сщ счетчиком правильных ответов, начальное значение закономерно 0
     private var correctAnswers = 0
+    //questionsA
     
     override func viewDidLoad() {
         super.viewDidLoad()
