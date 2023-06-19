@@ -33,7 +33,9 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
     @IBAction private func NoButton(_ sender: UIButton) {
-        let currentQuestion = questions[currentQuestionIndex]
+        guard let currentQuestion = currentQuestion else {
+            return
+        }
         let givenAnswer = false
         
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
