@@ -1,6 +1,6 @@
 import UIKit
 
-final class MovieQuizViewController: UIViewController {
+final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     // MARK: - Lifecycle
     
     @IBOutlet private var imageView: UIImageView!
@@ -10,25 +10,36 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private var counterLabel: UILabel!
     
     private var currentQuestionIndex = 0
-    
-    
-    // переменная сщ счетчиком правильных ответов, начальное значение закономерно 0
     private var correctAnswers = 0
-    //questionsAmount - общее количество вопросов для квиза.
     private let questionsAmount: Int = 10
-    // questionFactory - фабрика вопросов.
-    private let questionFactory: QuestionFactory = QuestionFactory()
-    // currentQuestion - текущий вопрос, который видит пользователь.
+    private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
+    private var gamesCount = 0
+    private var statisticService: StatisticService?
+    private var alertPresenter: AlertPresenter?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let firstQuestion = questionFactory.requestNextQuestion() {
-            currentQuestion = firstQuestion
-            let viewModel = convert(model: firstQuestion)
-            show(quiz: viewModel)
+        
+        imageView.layer.cornerRadius = 20
+        questionFactory = QuestionFactory(delegate: self)
+        questionFactory?.requestNextQuestion()
+        alertPresenter = AlertPresenterImpl(viewController: self)
+        statisticService = StatisticServiceImpl()
+        
+    }
+    // MARK: - QuestionFactoryDelegate
+    //метод делегата
+    func didReceiveNextQuestion(question: QuizQuestion?) {
+        guard let question = question else {
+            return
         }
         
+        currentQuestion = question
+        let viewModel = convert(model: question)
+        DispatchQueue.main.async { [weak self] in
+            self?.show(quiz: viewModel)
+        }
     }
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet weak var yesButton: UIButton!
@@ -73,12 +84,11 @@ final class MovieQuizViewController: UIViewController {
             self.correctAnswers = 0
             
             
-            if let firstQuestion = self.questionFactory.requestNextQuestion() {
-                self.currentQuestion = firstQuestion
-                let viewModel = self.convert(model: firstQuestion)
+         questionFactory?.requestNextQuestion()
+               
                 
-                show(quiz: viewModel)
-            }
+               
+            
           }
         
         
@@ -126,12 +136,11 @@ final class MovieQuizViewController: UIViewController {
             show(quiz: viewModel)
         } else {
             currentQuestionIndex += 1
-            if let nextQuestion = questionFactory.requestNextQuestion() {
-                currentQuestion = nextQuestion
-                let viewModel = convert(model: nextQuestion)
+             questionFactory?.requestNextQuestion()
                 
-                show(quiz: viewModel)
-            }
+                
+                
+            
         }
         
     }
