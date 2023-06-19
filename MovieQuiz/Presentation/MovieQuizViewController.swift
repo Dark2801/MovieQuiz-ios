@@ -42,7 +42,9 @@ final class MovieQuizViewController: UIViewController {
     
     
     @IBAction private func YesButton(_ sender: UIButton) {
-        let currentQuestion = questions[currentQuestionIndex]
+        guard let currentQuestion = currentQuestion else {
+            return
+        }
         let givenAnswer = true
         
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
