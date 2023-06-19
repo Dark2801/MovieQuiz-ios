@@ -73,10 +73,14 @@ final class MovieQuizViewController: UIViewController {
             self.correctAnswers = 0
             
             
-            let firstQuestion = questions[self.currentQuestionIndex]
-            let viewModel = self.convert(model: firstQuestion)
-            self.show(quiz: viewModel)
-        }
+            if let firstQuestion = self.questionFactory.requestNextQuestion() {
+                self.currentQuestion = firstQuestion
+                let viewModel = self.convert(model: firstQuestion)
+                
+                show(quiz: viewModel)
+            }
+          }
+        
         
         alert.addAction(action)
         
