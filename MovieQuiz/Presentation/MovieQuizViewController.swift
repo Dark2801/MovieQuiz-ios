@@ -42,6 +42,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
         }
     }
     @IBOutlet weak var noButton: UIButton!
+    @IBOutlet private var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var yesButton: UIButton!
     @IBAction private func NoButton(_ sender: UIButton) {
         guard let currentQuestion = currentQuestion else {
