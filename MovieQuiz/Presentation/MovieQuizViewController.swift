@@ -43,6 +43,14 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     }
     @IBOutlet weak var noButton: UIButton!
     @IBOutlet private var activityIndicator: UIActivityIndicatorView!
+    private func showLoadingIndicator() {
+        // сообщаем, что индикатор загрузки не скрыт
+        activityIndicator.isHidden = false
+        // включаем анимацию
+        activityIndicator.startAnimating()
+        }
+    
+
     @IBOutlet weak var yesButton: UIButton!
     @IBAction private func NoButton(_ sender: UIButton) {
         guard let currentQuestion = currentQuestion else {
@@ -163,6 +171,31 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
         let resultMessage = [currentGameResultLine, totalPlaysCountLine, bestGameInfoLine, averageAccuracyLine].joined(separator: "\n")
         return resultMessage
     }
+
+    
+    private func showNetworkError(message: String) {
+        activityIndicator.isHidden = true
+        
+        let alertModel = AlertModel(title: "Ошибка",
+                                    message: message,
+                                    buttonText: "Попробовать еще раз",
+                                    buttonAction: { [weak self] in
+            guard let self = self else { return }
+           
+            
+            self.currentQuestionIndex = 0
+            self.correctAnswers = 0
+            self.questionFactory?.requestNextQuestion()
+            
+            
+            
+        }
+        )
+        
+        alertPresenter?.show(alertModel: alertModel)
+    }
+    
+ 
 }
 
 
