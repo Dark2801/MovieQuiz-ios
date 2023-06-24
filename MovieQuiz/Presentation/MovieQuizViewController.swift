@@ -1,6 +1,16 @@
 import UIKit
 
 final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
+    func didLoadDataFromServer() {
+        activityIndicator.isHidden = true // скрываем индикатор загрузки
+        questionFactory?.requestNextQuestion()
+        imageView.layer.borderColor = UIColor.clear.cgColor
+        imageView.layer.borderWidth = 0
+    }
+    
+    func didFailToLoadData(with error: Error) {
+        showNetworkError(message: error.localizedDescription) // возьмем в качестве сообщения описание ошибки
+    }
     // MARK: - Lifecycle
     
     @IBOutlet private var imageView: UIImageView!
@@ -22,10 +32,12 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
         super.viewDidLoad()
         
         imageView.layer.cornerRadius = 20
-        questionFactory = QuestionFactory(delegate: self)
+        questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self )
         questionFactory?.requestNextQuestion()
         alertPresenter = AlertPresenterImpl(viewController: self)
         statisticService = StatisticServiceImpl()
+        showLoadingIndicator()
+        questionFactory?.loadData()
         
     }
     // MARK: - QuestionFactoryDelegate
@@ -118,10 +130,11 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
     }
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
-        return QuizStepViewModel(
-            image: UIImage(named: model.image) ?? UIImage(),
+        QuizStepViewModel(
+            image: UIImage(data: model.image) ?? UIImage(),
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
+        
     }
     
     private func showAnswerResult(isCorrect: Bool) {
@@ -185,7 +198,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate{
             
             self.currentQuestionIndex = 0
             self.correctAnswers = 0
-            self.questionFactory?.requestNextQuestion()
+            self.questionFactory?.loadData()
             
             
             
