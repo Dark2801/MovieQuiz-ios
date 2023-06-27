@@ -13,15 +13,12 @@ protocol NetworkRouting {
 }
 
 struct NetworkClient: NetworkRouting {
-    
-    private enum NetworkError: Error {
+private enum NetworkError: Error {
         case codeError
-    }
-    
-    func fetch(url: URL, handler: @escaping (Result<Data, Error>) -> Void) {
-        let request = URLRequest(url: url) // Создаем запрос из url
-        
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+}
+func fetch(url: URL, handler: @escaping (Result<Data, Error>) -> Void) {
+let request = URLRequest(url: url) // Создаем запрос из url
+let task = URLSession.shared.dataTask(with: request) { data, response, error in
             // проверяем пришла ли ошибка
             if let error = error {
                 handler(.failure(error))
@@ -36,8 +33,7 @@ struct NetworkClient: NetworkRouting {
             // Возвращаем данные
             guard let data = data else { return }
             handler(.success(data))
-        }
-        
-        task.resume()
-    }
+}
+task.resume()
+}
 }
