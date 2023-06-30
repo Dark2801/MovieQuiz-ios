@@ -7,9 +7,8 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         // Override point for customization after application launch
-        
-        return true
-    }
+return true
+}
 
     // MARK: UISceneSession Lifecycle
 

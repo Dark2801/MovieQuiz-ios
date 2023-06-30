@@ -78,7 +78,7 @@ YP Black</string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="NoButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nQO-dS-yzu"/>
+                                                    <action selector="noButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="q2X-BN-5RP"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ur4-wi-jSP" userLabel="Yes Button">
@@ -98,7 +98,7 @@ YP Black</string>
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="YesButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RfG-bW-28e"/>
+                                                    <action selector="yesButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uN5-gX-xW7"/>
                                                 </connections>
                                             </button>
                                         </subviews>
