@@ -4,7 +4,6 @@
 //
 //  Created by Андрей Мерзликин on 23.06.2023.
 //
-
 import Foundation
 protocol MoviesLoading {
 func loadMovies(handler: @escaping (Result<MostPopularMovies, Error>) -> Void)
