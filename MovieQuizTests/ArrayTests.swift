@@ -14,7 +14,7 @@ let array = [1, 1, 2, 3, 5]
         let value = array[safe: 2]
         // Then
 XCTAssertNotNil(value)
-        XCTAssertEqual(value: 2)
+        XCTAssertEqual(value, 2)
 }
     func testGetValueOutOfRange() throws { // тест на взятие элемента по неправильному индексу
         // Given

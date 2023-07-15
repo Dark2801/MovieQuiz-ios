@@ -29,7 +29,8 @@ do {
 let mostPopularMovies = try JSONDecoder().decode(MostPopularMovies.self, from: data)
 handler(.success(mostPopularMovies))
 } catch {
-handler(.failure(error)) }
+handler(.failure(error))
+}
 case .failure(let error):
 handler(.failure(error))
 }
