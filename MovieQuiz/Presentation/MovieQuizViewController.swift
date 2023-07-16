@@ -53,14 +53,14 @@ activityIndicator.isHidden = false
 activityIndicator.startAnimating()
 }
 @IBOutlet weak var yesButton: UIButton!
-@IBAction private func noButton(_ sender: UIButton) {
+@IBAction private func noButtonClicked(_ sender: UIButton) {
 guard let currentQuestion = currentQuestion else {
 return
 }
 let givenAnswer = false
 showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
 }
-@IBAction private func yesButton(_ sender: UIButton) {
+@IBAction private func yesButtonClicked(_ sender: UIButton) {
 guard let currentQuestion = currentQuestion else {
 return
 }
