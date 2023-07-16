@@ -35,7 +35,7 @@ func testScreenCast() throws { }
         app.buttons["Yes"].tap()
         // Создаем задержку
         sleep(3)
-        // Проверяем изменение лейбла с номером вопроса
+        // Получаем лейбл с номером вопроса
         let indexLabel = app.staticTexts["Index"]
         // снова находим UI-элемент
         let secondPoster = app.images["Poster"]
@@ -45,7 +45,29 @@ func testScreenCast() throws { }
         XCTAssertEqual(indexLabel.label, "2/10")
         // Сравниваем между собой два скриншота UI-элементов
         XCTAssertNotEqual(firstPosterData, secondPosterData)
-    }
+}
+    func testNobutton() {
+        // Создаем задержку
+        sleep(3)
+        // Yаходим первоначальный UI-элемент
+        let firstPoster = app.images["Poster"]
+        // Делаем скриншот UI-элемента
+        let firstPosterData = firstPoster.screenshot().pngRepresentation
+        // Нажимаем на кнопку "Нет"
+        app.buttons["No"].tap()
+        // Создаем задержку
+        sleep(3)
+        // Получаем лейьл с номером вопроса
+        let indexLabel = app.staticTexts["Index"]
+        // Снова находим UI-элемент
+        let secondPoster = app.images["Poster"]
+        // Делаем скриншот полученного UI-элемента
+        let secondPosterData = secondPoster.screenshot().pngRepresentation
+        // Проверяем что значение лейбла будет "2/10"
+        XCTAssertEqual(indexLabel.label, "2/10")
+        // Сравниваем между собой получившиеся скриншоты
+        XCTAssertNotEqual(firstPosterData, secondPosterData)
+}
 func testExample() throws {
         // UI tests must launch the application that they test.
         let app = XCUIApplication()
