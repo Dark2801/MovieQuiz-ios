@@ -39,9 +39,9 @@ imageData = try Data(contentsOf: movie.resizedImageURL)
 print("Failed to load image")
 }
 let rating = Float(movie.rating) ?? 0
-let number: Float = Float.random(in: 5...10)
+let number: Float = Float.random(in: 7...10)
 let text = "Рейтинг этого фильма больше чем \(String(format: "%.1f", number))?"
-let correctAnswer = rating > 5
+let correctAnswer = rating > number
 let question = QuizQuestion(image: imageData,
                             text: text,
                             correctAnswer: correctAnswer)

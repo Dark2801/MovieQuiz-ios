@@ -123,6 +123,7 @@ YP Black</string>
                             <string key="name">
 YP Black</string>
                         </color>
+                        <accessibility key="accessibilityConfiguration" identifier="Game Finish"/>
                         <constraints>
                             <constraint firstItem="OeV-SS-llk" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9rz-q3-HUn"/>
                             <constraint firstItem="OeV-SS-llk" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="Ciw-W0-uCZ"/>

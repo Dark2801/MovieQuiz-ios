@@ -26,7 +26,7 @@ override func tearDownWithError() throws {
 func testScreenCast() throws { }
     func testYesButton() {
         // Создаем задержку
-        sleep(3)
+        sleep(2)
         // Находим первоначальный UI-элемент
         let firstPoster = app.images["Poster"]
         // Делаем скроиншот UI-элемента
@@ -34,7 +34,7 @@ func testScreenCast() throws { }
         // Нажимаем на кнопку "Да"
         app.buttons["Yes"].tap()
         // Создаем задержку
-        sleep(3)
+        sleep(2)
         // Получаем лейбл с номером вопроса
         let indexLabel = app.staticTexts["Index"]
         // снова находим UI-элемент
@@ -48,7 +48,7 @@ func testScreenCast() throws { }
 }
     func testNobutton() {
         // Создаем задержку
-        sleep(3)
+        sleep(2)
         // Yаходим первоначальный UI-элемент
         let firstPoster = app.images["Poster"]
         // Делаем скриншот UI-элемента
@@ -56,8 +56,8 @@ func testScreenCast() throws { }
         // Нажимаем на кнопку "Нет"
         app.buttons["No"].tap()
         // Создаем задержку
-        sleep(3)
-        // Получаем лейьл с номером вопроса
+        sleep(2)
+        // Получаем лейбл с номером вопроса
         let indexLabel = app.staticTexts["Index"]
         // Снова находим UI-элемент
         let secondPoster = app.images["Poster"]
@@ -68,12 +68,31 @@ func testScreenCast() throws { }
         // Сравниваем между собой получившиеся скриншоты
         XCTAssertNotEqual(firstPosterData, secondPosterData)
 }
-func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+// Тест появления алерта при окончании раунда
+    func testGameFinish() {
+        sleep(2)
+        for _ in 1...10 {
+            app.buttons["Yes"].tap()
+            sleep(2)
+            app.buttons["No"].tap()
+            sleep(2)
+        }
+        let alert = app.alerts["Game results"]
+        XCTAssertTrue(alert.exists)
+        XCTAssertTrue(alert.label == "Этот раунд окончен!")
+        XCTAssertTrue(alert.buttons.firstMatch.label == "Сыграть ещё раз")
 }
-            
+    func testAlertDismiss() {
+        sleep(2)
+        for _ in 1...10 {
+            app.buttons["Yes"].tap()
+            sleep(2)
+        }
+        let alert = app.alerts["Game results"]
+        alert.buttons.firstMatch.tap()
+        sleep(2)
+        let indexLabel = app.staticTexts["Index"]
+        XCTAssertFalse(alert.exists)
+        XCTAssertTrue(indexLabel.label == "1/10")
+    }
 }
