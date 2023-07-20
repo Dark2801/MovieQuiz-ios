@@ -16,7 +16,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     private var currentQuestionIndex: Int = 0
     init(viewController: MovieQuizViewControllerProtocol) {
         self.viewController = viewController as? MovieQuizViewController
-        statisticService = StatisticServiceImpl()
+        statisticService = StatisticServiceImplementation()
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
         questionFactory?.loadData()
 }
@@ -86,19 +86,17 @@ func didAnswer(isCorrectAnswer: Bool) {
         correctAnswers += 1
 }
 func makeResultMessage() -> String {
-        guard let statisticService = statisticService, let bestGame = statisticService.bestGame else {
-            assertionFailure("error message")
-            return ""
-}
-let totalPlaysCountLine = "Количество сыгранных квизов: \(statisticService.gamesCount)"
-let currentGameResultLine = "Ваш результат: \(correctAnswers)/\(questionsAmount)"
-let bestGameInfoLine = "Рекорд: \(bestGame.correct)/\(bestGame.total) (\(bestGame.date.dateTimeString))"
-let averageAccuracyLine = "Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%"
-let resultMessage = [currentGameResultLine,
-                     totalPlaysCountLine,
-                     bestGameInfoLine,
-                     averageAccuracyLine].joined(separator: "\n")
-        return resultMessage
+    guard let statisticService = statisticService else { return "" }
+    
+    statisticService.store(correct: correctAnswers, total: questionsAmount)
+    
+    let text = """
+               Ваш результат: \(correctAnswers)/\(questionsAmount)
+               Количество сыгранных квизов: \(statisticService.gamesCount)
+               Рекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))
+               Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
+               """
+    return text
 }
 func showAnswerResult(isCorrect: Bool) {
         if isCorrect {

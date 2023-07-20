@@ -29,6 +29,7 @@
 		BD757EFA2A4076C000B18E2E /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD757EF92A4076C000B18E2E /* AlertPresenter.swift */; };
 		BD757EFC2A40846400B18E2E /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD757EFB2A40846400B18E2E /* StatisticService.swift */; };
 		BD757EFE2A4089A300B18E2E /* BestGame.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD757EFD2A4089A300B18E2E /* BestGame.swift */; };
+		BD79ACB52A69B0B100E2B386 /* MoviesLoaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD79ACB42A69B0B000E2B386 /* MoviesLoaderTests.swift */; };
 		BD828B852A2915DE003C86F4 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD828B842A2915DE003C86F4 /* YS Display-Medium.ttf */; };
 		BD828B872A2915ED003C86F4 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BD828B862A2915ED003C86F4 /* YS Display-Bold.ttf */; };
 		BDCC399D2A62AF7B00AC24AD /* ArrayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDCC399C2A62AF7B00AC24AD /* ArrayTests.swift */; };
@@ -88,11 +89,11 @@
 		BD757EF92A4076C000B18E2E /* AlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
 		BD757EFB2A40846400B18E2E /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
 		BD757EFD2A4089A300B18E2E /* BestGame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BestGame.swift; sourceTree = "<group>"; };
+		BD79ACB42A69B0B000E2B386 /* MoviesLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLoaderTests.swift; sourceTree = "<group>"; };
 		BD828B842A2915DE003C86F4 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		BD828B862A2915ED003C86F4 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		BDCC39932A629D3700AC24AD /* MovieQuizTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieQuizTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCC399C2A62AF7B00AC24AD /* ArrayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayTests.swift; sourceTree = "<group>"; };
-		BDCC399E2A62BE7500AC24AD /* MoviesLoaderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLoaderTests.swift; sourceTree = "<group>"; };
 		BDCF6B212A64232F00ED5755 /* MovieQuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieQuizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDCF6B232A64232F00ED5755 /* MovieQuizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizUITests.swift; sourceTree = "<group>"; };
 		BDDD45732A45E8B700BA6686 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
@@ -256,7 +257,7 @@
 			isa = PBXGroup;
 			children = (
 				BDCC399C2A62AF7B00AC24AD /* ArrayTests.swift */,
-				BDCC399E2A62BE7500AC24AD /* MoviesLoaderTests.swift */,
+				BD79ACB42A69B0B000E2B386 /* MoviesLoaderTests.swift */,
 			);
 			path = MovieQuizTests;
 			sourceTree = "<group>";
@@ -493,6 +494,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BDCC399D2A62AF7B00AC24AD /* ArrayTests.swift in Sources */,
+				BD79ACB52A69B0B100E2B386 /* MoviesLoaderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
