@@ -11,8 +11,8 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     private weak var viewController: MovieQuizViewController?
-    var correctAnswers = 0
-    let questionsAmount: Int = 10
+    private var correctAnswers = 0
+    private let questionsAmount: Int = 10
     private var currentQuestionIndex: Int = 0
     init(viewController: MovieQuizViewControllerProtocol) {
         self.viewController = viewController as? MovieQuizViewController
