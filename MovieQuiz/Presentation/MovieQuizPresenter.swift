@@ -8,7 +8,7 @@ import UIKit
 
 final class MovieQuizPresenter: QuestionFactoryDelegate {
     private let statisticService: StatisticService!
-    private var questionFactory: QuestionFactoryProtocol?
+    private let questionFactory: QuestionFactoryProtocol
     private var currentQuestion: QuizQuestion?
     private weak var viewController: MovieQuizViewController?
     private var correctAnswers = 0
@@ -18,7 +18,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         self.viewController = viewController as? MovieQuizViewController
         statisticService = StatisticServiceImplementation()
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
-        questionFactory?.loadData()
+        questionFactory.loadData()
 }
     func didReceiveNextQuestion(question: QuizQuestion?) {
         guard let question = question else {
@@ -32,7 +32,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
 }
 func didLoadDataFromServer() {
         viewController?.hideLoadingIndicator()
-        questionFactory?.requestNextQuestion()
+        questionFactory.requestNextQuestion()
 }
 func didFailToLoadData(with error: Error) {
         let message = error.localizedDescription
