@@ -5,20 +5,19 @@
 //  Created by Андрей Мерзликин on 17.07.2023.
 //
 import UIKit
-
 final class MovieQuizPresenter: QuestionFactoryDelegate {
     private let statisticService: StatisticService!
-    private let questionFactory: QuestionFactoryProtocol
+    private var questionFactory: QuestionFactoryProtocol?
     private var currentQuestion: QuizQuestion?
     private weak var viewController: MovieQuizViewController?
     private var correctAnswers = 0
     private let questionsAmount: Int = 10
     private var currentQuestionIndex: Int = 0
     init(viewController: MovieQuizViewControllerProtocol) {
-        self.viewController = viewController as? MovieQuizViewController
+        self.viewController = (viewController as? MovieQuizViewController)!
         statisticService = StatisticServiceImplementation()
         questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
-        questionFactory.loadData()
+        questionFactory?.loadData()
 }
     func didReceiveNextQuestion(question: QuizQuestion?) {
         guard let question = question else {
@@ -32,7 +31,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
 }
 func didLoadDataFromServer() {
         viewController?.hideLoadingIndicator()
-        questionFactory.requestNextQuestion()
+        questionFactory?.requestNextQuestion()
 }
 func didFailToLoadData(with error: Error) {
         let message = error.localizedDescription
@@ -45,7 +44,7 @@ func noButtonClicked() {
         didAnswer(isYes: false)
 }
 private func didAnswer(isYes: Bool) {
-        guard let currentQuestion = currentQuestion else {
+    guard var currentQuestion = currentQuestion else {
             return
 }
 let givenAnswer = isYes
@@ -64,7 +63,7 @@ func isLastQuestion() -> Bool {
 func restartGame() {
         currentQuestionIndex = 0
         correctAnswers = 0
-        questionFactory?.requestNextQuestion()
+    questionFactory?.requestNextQuestion()
 }
 func switchToNextQuestion() {
         currentQuestionIndex += 1
@@ -77,9 +76,9 @@ func showNextQuestionOrResults() {
             viewController?.buttonsAreActive()
 } else {
             switchToNextQuestion()
-            questionFactory?.requestNextQuestion()
-            viewController?.clearBorder()
-            viewController?.buttonsAreActive()
+    questionFactory?.requestNextQuestion()
+    viewController?.clearBorder()
+    viewController?.buttonsAreActive()
 }
 }
 func didAnswer(isCorrectAnswer: Bool) {
@@ -87,16 +86,14 @@ func didAnswer(isCorrectAnswer: Bool) {
 }
 func makeResultMessage() -> String {
     guard let statisticService = statisticService else { return "" }
-    
     statisticService.store(correct: correctAnswers, total: questionsAmount)
-    
-    let text = """
-               Ваш результат: \(correctAnswers)/\(questionsAmount)
-               Количество сыгранных квизов: \(statisticService.gamesCount)
-               Рекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))
-               Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
-               """
-    return text
+let text = """
+Ваш результат: \(correctAnswers)/\(questionsAmount)
+Количество сыгранных квизов: \(statisticService.gamesCount)
+Рекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))
+Средняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%
+"""
+return text
 }
 func showAnswerResult(isCorrect: Bool) {
         if isCorrect {

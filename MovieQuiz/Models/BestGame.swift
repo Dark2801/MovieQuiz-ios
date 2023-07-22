@@ -13,5 +13,3 @@ struct GameRecord: Codable, Comparable {
         lhs.correct < rhs.correct
     }
 }
-   
-  
